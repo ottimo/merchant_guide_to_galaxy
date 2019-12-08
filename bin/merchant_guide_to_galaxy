@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'optparse'
+require 'merchant_guide_to_galaxy'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: merchant_guide_to_galaxy [options]"
+
+  opts.on("-f", "--file FILENAME", "Parse a file with all messages") do |f|
+    options[:filename] = f
+  end
+end.parse!
+
+p options
+p ARGV
+begin
+  file = File.open(options[:filename], 'r')
+  app = MerchantGuideToGalaxy::Application.new
+  file.readlines.each do |line|
+    puts app.read(line)
+  end
+ensure
+  file.close
+end
