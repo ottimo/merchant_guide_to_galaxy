@@ -13,13 +13,12 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-p options
-p ARGV
 begin
   file = File.open(options[:filename], 'r')
   app = MerchantGuideToGalaxy::Application.new
   file.readlines.each do |line|
-    puts app.read(line)
+    reply = app.read(line)
+    puts reply unless reply.nil?
   end
 ensure
   file.close
