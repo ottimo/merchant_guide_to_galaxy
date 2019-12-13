@@ -35,6 +35,7 @@ module MerchantGuideToGalaxy
       return reply
     end
 
+    #TODO here we can integrate a NLP
     def parse(input)
       if MEANS_CHECK.match?(input)
         ret = input.to_s.scan(MEANS_CHECK)
